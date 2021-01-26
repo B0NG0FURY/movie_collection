@@ -8,6 +8,8 @@ ActiveRecord::Base.establish_connection(
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
 
+require 'pry'
+require 'bcrypt'
 require 'sysrandom/securerandom'
 require './app/controllers/application_controller'
 require_all 'app'
