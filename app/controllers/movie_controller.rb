@@ -13,8 +13,7 @@ class MovieController < ApplicationController
         if !params[:movie][:name].empty?
             movie = Movie.create(params[:movie])
             movie.user_id = session[:user_id]
-            director = Director.find_or_create_by(params[:director])
-            movie.director = director
+            movie.director = Director.find_or_create_by(params[:director])
             movie.save
             redirect "/movies/#{movie.slug}"
         else
