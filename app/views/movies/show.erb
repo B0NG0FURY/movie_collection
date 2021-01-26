@@ -1,0 +1,23 @@
+<h2><%= @movie.name %></h2>
+<p><%= @movie.year %></p>
+<h3>Director</h3>
+<p><%= @movie.director.name %></p>
+<h3>Genre(s)</h3>
+    <ul>
+        <% @movie.genres.each do |genre| %>
+        <li><%= genre.name %></li>
+        <% end %>
+    </ul>
+
+<h3>Format(s)</h3>
+    <ul>
+            <% @movie.formats.each do |format| %>
+            <li><%= format.name %></li>
+            <% end %>
+    </ul>
+<h3>Description</h3>
+<p><%= @movie.description %></p>
+
+<a href="/movies/<%= @movie.slug %>/edit">Edit</a>
+<a href="/movies">Back</a>
+<a href="/user/logout">Logout</a>
