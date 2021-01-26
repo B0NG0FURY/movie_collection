@@ -1,8 +1,7 @@
 class UserController < ApplicationController
 
     get '/user' do
-        @user = User.find_by_id(session[:user_id])
-        puts @user
+        @user = current_user
         if @user
             erb :'/users/home'
         else
@@ -33,7 +32,7 @@ class UserController < ApplicationController
     end
 
     post '/user/new' do
-        if !params[:user][:username].empty? && !params[:user][:password].empty?
+        if form_completed? && password_verified?
             user = User.create(params[:user])
             session[:user_id] = user.id
             redirect '/user'
@@ -53,7 +52,15 @@ class UserController < ApplicationController
         end
 
         def current_user
-            User.find(session[:user_id])
+            User.find_by_id(session[:user_id])
+        end
+
+        def form_completed?
+            !params[:user][:name].empty? && !params[:user][:username].empty? && !params[:user][:password].empty? && !params[:password_verify].empty?
+        end
+
+        def password_verified?
+            params[:user][:password] == params[:password_verify]
         end
     end
 end

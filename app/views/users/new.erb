@@ -1,13 +1,22 @@
 <h2>Create New Account:</h2>
 
 <form method="post" action="/user/new">
+    <label for="user[name]">Name: </label>
+    <input type="text" name="user[name]"></input>
+    <br><br>
+
     <label for="user[username]">Username: </label>
     <input type="text" name="user[username]"></input>
-    </br></br>
+    <br><br>
 
     <label for="user[password]">Password: </label>
-    <input type="text" name="user[password]"></input>
+    <input type="password" name="user[password]"></input>
     <br><br>
+
+    <label for="password_verify">Verify Password: </label>
+    <input type="password" name="password_verify"></input>
+    <br><br>
+    
     <input type="submit" value="Create Account"></input>
 </form>
 
