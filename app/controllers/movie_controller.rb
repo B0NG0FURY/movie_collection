@@ -76,6 +76,12 @@ class MovieController < ApplicationController
         redirect "/movies/#{@movie.slug}"
     end
 
+    delete '/movies/:slug' do
+        @movie = find_by_slug(params[:slug], User.find_by_id(session[:user_id]))
+        @movie.delete
+        redirect "/movies"
+    end
+
     helpers do
        def find_by_slug(slug, user)
         slug = slug.split("-").map {|a| a.capitalize}
