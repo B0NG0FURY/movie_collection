@@ -1,0 +1,28 @@
+<h2>Edit <%= @movie.name %></h2>
+
+<form method="post" action="/movies/<%= @movie.slug %>">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <label for="movie[name]">Name: </label>
+    <input type="text" name="movie[name]" value="<%= @movie.name %>"></input>
+    </br></br>
+    <label for="movie[year]">Year: </label>
+    <input type="text" name="movie[year]" value="<%= @movie.year %>"></input>
+    </br></br>
+    <label for="director[name]">Director: </label>
+    <input type="text" name="director[name]" value="<%= @movie.director.name %>"></input>
+    </br></br>
+    <label for="movie[description]">Description: </label>
+    <textarea rows="4" cols="25" name="movie[description]"><%= @movie.description %></textarea>
+    </br></br>
+    <p>Genres:</p>
+    <% @genres.each do |genre| %>
+    <input type="checkbox" name="movie[genre_ids][]" value="<%= genre.id %>" <%= "checked" if @movie.genres.include?(genre) %>><%= genre.name %></input>
+    <% end %>
+    </br></br>
+    <p>Formats:</p>
+    <% @formats.each do |format| %>
+    <input type="checkbox" name="movie[format_ids][]" value="<%= format.id %>" <%= "checked" if @movie.formats.include?(format) %>><%= format.name %></input>
+    <% end %>
+    </br></br>
+    <input type="submit" value="Save Changes"></input>
+</form>
