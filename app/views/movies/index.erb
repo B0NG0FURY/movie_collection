@@ -2,11 +2,10 @@
 <% if !@user.movies.empty? %>
 
 <p class="list">
-    <ol>
         <% @movies.each do |movie|%>
-        <li><a href="/movies/<%= movie.slug %>"><%= movie.name %></a></li>
+        <h4><a href="/movies/<%= movie.slug %>"><%= movie.name %></a></h4>
+        <br>
         <% end %>
-    </ol>
 </p>
 
 <% else %>

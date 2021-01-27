@@ -2,9 +2,8 @@
 <h4>Click on director to see their movies</h4>
 <p>
     <% @directors.each do |director| %>
-    <ol>
-        <li><a href="/directors/<%= director.slug %>"><%= director.name %></a></li>
-    </ol>
+        <h4><a href="/directors/<%= director.slug %>"><%= director.name %></a></h4>
+        <br>
     <% end %>
 </p>
 
