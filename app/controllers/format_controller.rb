@@ -1,0 +1,2 @@
+class FormatController < ApplicationController
+end

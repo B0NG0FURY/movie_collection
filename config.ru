@@ -9,4 +9,5 @@ use UserController
 use MovieController
 use DirectorController
 use GenreController
+use FormatController
 run ApplicationController
