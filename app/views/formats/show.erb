@@ -1,0 +1,18 @@
+<h2><%= @format.name.capitalize %> Movies:</h2>
+
+<% if !@list.empty? %>
+    <p>
+        <% @list.each do |movie| %>
+        <h4><a href="/movies/<%= movie.slug %>"><%= movie.name %></a></h4>
+        <br>
+        <% end %>
+    </p>
+<% else %>
+    <h3>You don't have any <%= @format.name %> titles yet!</h3>
+    <h4>Want to add one? <a href="/movies/new">Add Movie</a></h4>
+<% end %>
+<br>
+
+<a href="/formats">Formats</a>
+<a href="/user">Home</a>
+<a href="/user/logout">Logout</a>
