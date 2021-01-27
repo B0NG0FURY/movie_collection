@@ -1,0 +1,12 @@
+<h2>Movies by <%= @director.name %>:</h2>
+
+<p>
+    <ol>
+        <% @director_movies.each do |movie| %>
+        <li><a href="/movies/<%= movie.slug %>"><%= movie.name %></a></li>
+        <% end %>
+    </ol>
+</p>
+
+<a href="/user">Home</a>
+<a href="/user/logout">Logout</a>

@@ -3,6 +3,7 @@ class MovieController < ApplicationController
     get '/movies' do
         @user = User.find_by_id(session[:user_id])
         if @user
+            @movies = @user.movies.sort_by {|movie| movie.name}
             erb :"/movies/index"
         else
             erb :"/users/error"

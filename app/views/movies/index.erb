@@ -3,7 +3,7 @@
 
 <p class="list">
     <ol>
-        <% @user.movies.each do |movie|%>
+        <% @movies.each do |movie|%>
         <li><a href="/movies/<%= movie.slug %>"><%= movie.name %></a></li>
         <% end %>
     </ol>
