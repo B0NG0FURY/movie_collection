@@ -8,4 +8,5 @@ use Rack::MethodOverride
 use UserController
 use MovieController
 use DirectorController
+use GenreController
 run ApplicationController

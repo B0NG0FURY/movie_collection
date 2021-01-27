@@ -7,7 +7,7 @@ class DirectorController < ApplicationController
             @directors = alphabetize(@directors)
             erb :"directors/index"
         else
-            erb :"users/error.erb"
+            erb :"users/error"
         end
     end
 
