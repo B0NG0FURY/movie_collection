@@ -1,0 +1,8 @@
+<h2>Directors in your collection</h2>
+<p>
+    <% @directors.each do |director| %>
+    <ol>
+        <li><a href="/movies/<%= director.slug %>"><%= director.name %></a></li>
+    </ol>
+    <% end %>
+</p>
