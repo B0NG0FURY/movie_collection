@@ -3,7 +3,7 @@ class FormatController < ApplicationController
     get '/formats' do
         @user = User.find_by_id(session[:user_id])
         if @user
-            @formats = Format.all.sort_by {|format| format.name}
+            @formats = get_formats(@user).sort_by {|format| format.name}
             erb :"/formats/index"
         else
             erb :"/users/error"
@@ -18,6 +18,18 @@ class FormatController < ApplicationController
             erb :"/formats/show"
         else
             erb :"/users/error"
+        end
+    end
+
+    helpers do
+        def get_formats(user)
+            formats = []
+            user.formats.each do |format|
+                if !formats.include?(format)
+                    formats << format
+                end
+            end
+            formats
         end
     end
 

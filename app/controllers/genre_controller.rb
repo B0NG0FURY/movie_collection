@@ -3,7 +3,7 @@ class GenreController < ApplicationController
     get '/genres' do
         @user = User.find_by_id(session[:user_id])
         if @user
-            @genres = Genre.all.sort_by {|genre| genre.name}
+            @genres = get_genres(@user).sort_by {|genre| genre.name}
             erb :"/genres/index"
         else
             erb :"/users/error"
@@ -18,6 +18,18 @@ class GenreController < ApplicationController
             erb :"/genres/show"
         else
             erb :"/users/error"
+        end
+    end
+
+    helpers do
+        def get_genres(user)
+            genres = []
+            user.genres.each do |genre|
+                if !genres.include?(genre)
+                    genres << genre
+                end
+            end
+            genres
         end
     end
 

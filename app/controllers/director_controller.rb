@@ -3,7 +3,7 @@ class DirectorController < ApplicationController
     get '/directors' do
         @user = User.find_by_id(session[:user_id])
         if @user
-            @directors = @user.directors
+            @directors = get_directors(@user)
             @directors = alphabetize(@directors)
             erb :"directors/index"
         else
@@ -33,6 +33,16 @@ class DirectorController < ApplicationController
             slug = slug.split("-").map {|a| a.capitalize}
             name = slug.join(" ")
             user.directors.find_by(name: name)
+        end
+
+        def get_directors(user)
+            directors = []
+            user.directors.each do |director|
+                if !directors.include?(director)
+                    directors << director
+                end
+            end
+            directors
         end
     end
 end
