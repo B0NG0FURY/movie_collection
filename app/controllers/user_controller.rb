@@ -32,7 +32,7 @@ class UserController < ApplicationController
     end
 
     post '/user/new' do
-        if form_completed? && password_verified?
+        if form_completed? && password_verified? && !User.find_by(username: params[:user][:username])
             user = User.create(params[:user])
             session[:user_id] = user.id
             redirect '/user'
