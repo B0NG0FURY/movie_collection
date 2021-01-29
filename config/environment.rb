@@ -11,5 +11,6 @@ ActiveRecord::Base.establish_connection(
 require 'pry'
 require 'bcrypt'
 require 'sysrandom/securerandom'
+require 'rack-flash'
 require './app/controllers/application_controller'
 require_all 'app'
