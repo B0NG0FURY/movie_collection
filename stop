@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /mnt/c/Users/eldud/dev/movie_collection/app/controllers/movie_controller.rb:84 self.DELETE /movies/:slug:
+
+    [1;34m79[0m: 
+    [1;34m80[0m:     delete [31m[1;31m'[0m[31m/movies/:slug[1;31m'[0m[31m[0m [32mdo[0m
+    [1;34m81[0m:         @movie = find_by_slug(params[[33m:slug[0m], [1;34;4mUser[0m.find_by_id(session[[33m:user_id[0m]))
+    [1;34m82[0m:         @movie.delete
+    [1;34m83[0m:         flash[[33m:delete[0m] = [31m[1;31m"[0m[31mMovie successfully removed from collection.[1;31m"[0m[31m[0m
+ => [1;34m84[0m:         binding.pry
+    [1;34m85[0m:         redirect [31m[1;31m"[0m[31m/movies[1;31m"[0m[31m[0m
+    [1;34m86[0m:     [32mend[0m
+    [1;34m87[0m: 
+    [1;34m88[0m:     helpers [32mdo[0m
+    [1;34m89[0m:        [32mdef[0m [1;34mfind_by_slug[0m(slug, user)
+

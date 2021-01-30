@@ -1,5 +1,6 @@
-<% if flash.has?(:message) %>
-<%= flash[:message] %>
+<% if flash.has?(:movie) %>
+<% binding.pry %>
+<%= flash[:movie] %>
 <% end %>
 
 <h2><%= @movie.name %></h2>

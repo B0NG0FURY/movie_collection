@@ -9,6 +9,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, ENV['SESSION_MOVIE'] { SecureRandom.hex(64) }
   end
 
+  require 'rack-flash'
+  use Rack::Flash
+
   get "/" do
     erb :index
   end

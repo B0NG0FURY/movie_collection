@@ -1,4 +1,6 @@
 class MovieController < ApplicationController
+    require 'rack-flash'
+    use Rack::Flash
 
     get '/movies' do
         @user = User.find_by_id(session[:user_id])
@@ -16,7 +18,7 @@ class MovieController < ApplicationController
             movie.user_id = session[:user_id]
             movie.director = Director.find_or_create_by(params[:director])
             movie.save
-            flash[:message] = "Movie successfully added to collection."
+            flash[:movie] = "Movie successfully added to collection."
             redirect "/movies/#{movie.slug}"
         else
             redirect "/movies/new"
@@ -80,6 +82,7 @@ class MovieController < ApplicationController
     delete '/movies/:slug' do
         @movie = find_by_slug(params[:slug], User.find_by_id(session[:user_id]))
         @movie.delete
+        flash[:delete] = "Movie successfully removed from collection."
         redirect "/movies"
     end
 
