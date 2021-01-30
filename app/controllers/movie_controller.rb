@@ -1,6 +1,4 @@
 class MovieController < ApplicationController
-    require 'rack-flash'
-    use Rack::Flash
 
     get '/movies' do
         @user = User.find_by_id(session[:user_id])
