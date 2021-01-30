@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
+
 <h2><%= @movie.name %></h2>
 <p><%= @movie.year %></p>
 <h3>Director</h3>

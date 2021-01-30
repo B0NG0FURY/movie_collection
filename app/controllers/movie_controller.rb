@@ -16,6 +16,7 @@ class MovieController < ApplicationController
             movie.user_id = session[:user_id]
             movie.director = Director.find_or_create_by(params[:director])
             movie.save
+            flash[:message] = "Movie successfully added to collection."
             redirect "/movies/#{movie.slug}"
         else
             redirect "/movies/new"
