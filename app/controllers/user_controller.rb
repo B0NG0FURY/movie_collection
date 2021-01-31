@@ -22,6 +22,7 @@ class UserController < ApplicationController
             session[:user_id] = user.id
             redirect '/user'
         else
+            flash[:error] = "The username or password entered is incorrect."
             redirect '/user/login'
         end
 
@@ -32,11 +33,20 @@ class UserController < ApplicationController
     end
 
     post '/user/new' do
-        if form_completed? && password_verified? && !User.find_by(username: params[:user][:username])
+        if form_completed? && password_verified? && !user_exists?(params[:user][:username])
             user = User.create(params[:user])
+            user.name = capitalize_name(user.name)
+            user.save
             session[:user_id] = user.id
             redirect '/user'
-        else
+        elsif form_completed? && !password_verified? && !user_exists?(params[:user][:username])
+            flash[:error] = "The passwords do not match, please try again."
+            redirect '/user/new'
+        elsif form_completed? && user_exists?(params[:user][:username])
+            flash[:error] = "That username already exists. Try again."
+            redirect '/user/new'
+        elsif !form_completed?
+            flash[:error] = "One or more forms left blank. Please fill out all forms completely."
             redirect '/user/new'
         end
     end
@@ -55,12 +65,20 @@ class UserController < ApplicationController
             User.find_by_id(session[:user_id])
         end
 
+        def user_exists?(name)
+            User.find_by(username: name)
+        end
+
         def form_completed?
             !params[:user][:name].empty? && !params[:user][:username].empty? && !params[:user][:password].empty? && !params[:password_verify].empty?
         end
 
         def password_verified?
             params[:user][:password] == params[:password_verify]
+        end
+
+        def capitalize_name(name)
+            name.split(" ").map {|n| n.capitalize}.join(" ")
         end
     end
 end
