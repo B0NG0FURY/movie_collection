@@ -1,3 +1,8 @@
+<% if flash[:movie] %>
+*** <%= flash[:movie] %> ***
+<br><br>
+<% end %>
+
 <h2><%= @movie.name %></h2>
 <p><%= @movie.year %></p>
 <h3>Director</h3>

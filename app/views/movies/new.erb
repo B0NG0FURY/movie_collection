@@ -1,3 +1,8 @@
+<% if flash[:movie] %>
+*** <%= flash[:movie] %> ***
+<br><br>
+<% end %>
+
 <h2>Add a movie to your collection</h2>
 
 <form method="post" action="/movies">
