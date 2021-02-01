@@ -1,10 +1,9 @@
 class DirectorController < ApplicationController
 
     get '/directors' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         if @user
-            @directors = get_directors(@user)
-            @directors = alphabetize(@directors)
+            @directors = alphabetize(get_directors)
             erb :"directors/index"
         else
             erb :"users/error"
@@ -12,9 +11,9 @@ class DirectorController < ApplicationController
     end
 
     get '/directors/:slug' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         if @user
-            @director = find_by_slug(params[:slug], User.find_by_id(session[:user_id]))
+            @director = find_by_slug(params[:slug])
             @director_movies = @user.movies.select {|movie| movie.director == @director}
             @director_movies = @director_movies.sort_by {|movie| movie.name}
             erb :"/directors/show"
@@ -29,15 +28,15 @@ class DirectorController < ApplicationController
             array.sort_by {|d| d.name.split(" ").last}
         end
 
-        def find_by_slug(slug, user)
+        def find_by_slug(slug)
             slug = slug.split("-").map {|a| a.capitalize}
             name = slug.join(" ")
-            user.directors.find_by(name: name)
+            current_user.directors.find_by(name: name)
         end
 
-        def get_directors(user)
+        def get_directors
             directors = []
-            user.directors.each do |director|
+            current_user.directors.each do |director|
                 if !directors.include?(director)
                     directors << director
                 end

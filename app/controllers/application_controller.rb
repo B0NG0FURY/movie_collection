@@ -20,9 +20,13 @@ class ApplicationController < Sinatra::Base
     def logged_in?
       !!session[:user_id]
     end
-  
+
     def current_user
         User.find_by_id(session[:user_id])
+    end
+
+    def capitalize_name(name)
+      name.split(" ").map {|n| n.capitalize}.join(" ")
     end
   end
 
