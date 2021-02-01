@@ -1,7 +1,7 @@
 class MovieController < ApplicationController
 
     get '/movies' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         if @user
             @movies = @user.movies.sort_by {|movie| movie.name}
             erb :"/movies/index"
@@ -36,10 +36,10 @@ class MovieController < ApplicationController
     end
 
     get '/movies/:slug' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
 
         if @user
-            @movie = find_by_slug(params[:slug], @user)
+            @movie = find_by_slug(params[:slug])
             erb :"/movies/show"
         else
             erb :"/users/error"
@@ -47,11 +47,11 @@ class MovieController < ApplicationController
     end
 
     get '/movies/:slug/edit' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         @genres = Genre.all
         @formats = Format.all
         if @user
-            @movie = find_by_slug(params[:slug], @user)
+            @movie = find_by_slug(params[:slug])
             erb :"/movies/edit"
         else
             erb :"/users/error"
@@ -66,8 +66,8 @@ class MovieController < ApplicationController
         if !params[:movie].keys.include?("format_ids")
             params[:movie][:format_ids] = []
         end
-        @user = User.find_by_id(session[:user_id])
-        @movie = find_by_slug(params[:slug], @user)
+        @user = current_user
+        @movie = find_by_slug(params[:slug])
 
         if !params[:movie][:name].empty?
             @movie.update(params[:movie])
@@ -86,17 +86,17 @@ class MovieController < ApplicationController
     end
 
     delete '/movies/:slug' do
-        @movie = find_by_slug(params[:slug], User.find_by_id(session[:user_id]))
+        @movie = find_by_slug(params[:slug])
         @movie.delete
         flash[:delete] = "Movie successfully removed from collection."
         redirect "/movies"
     end
 
     helpers do
-       def find_by_slug(slug, user)
+       def find_by_slug(slug)
         slug = slug.split("-").map {|a| a.capitalize}
         title = slug.join(" ")
-        user.movies.find_by(name: title)
+        current_user.movies.find_by(name: title)
        end
 
        def capitalize_name(name)
