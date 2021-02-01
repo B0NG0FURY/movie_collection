@@ -68,9 +68,5 @@ class UserController < ApplicationController
         def password_verified?
             params[:user][:password] == params[:password_verify]
         end
-
-        def capitalize_name(name)
-            name.split(" ").map {|n| n.capitalize}.join(" ")
-        end
     end
 end

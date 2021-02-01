@@ -71,13 +71,15 @@ class MovieController < ApplicationController
 
         if !params[:movie][:name].empty?
             @movie.update(params[:movie])
+            @movie.name = capitalize_name(params[:movie][:name])
+            @movie.save
         else
             flash[:movie] = "You need to enter a name for your movie!"
             redirect "/movies/#{@movie.slug}/edit"
         end
 
         if !params[:director][:name].empty?
-            @movie.director = Director.find_or_create_by(name: params[:director][:name])
+            @movie.director = Director.find_or_create_by(name: capitalize_name(params[:director][:name]))
             @movie.save
         end
 
@@ -97,10 +99,6 @@ class MovieController < ApplicationController
         slug = slug.split("-").map {|a| a.capitalize}
         title = slug.join(" ")
         current_user.movies.find_by(name: title)
-       end
-
-       def capitalize_name(name)
-        name.split(" ").map {|n| n.capitalize}.join(" ")
        end
 
        def in_collection?(name)
