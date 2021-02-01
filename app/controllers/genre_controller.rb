@@ -1,9 +1,9 @@
 class GenreController < ApplicationController
 
     get '/genres' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         if @user
-            @genres = get_genres(@user).sort_by {|genre| genre.name}
+            @genres = get_genres.sort_by {|genre| genre.name}
             erb :"/genres/index"
         else
             erb :"/users/error"
@@ -11,7 +11,7 @@ class GenreController < ApplicationController
     end
 
     get '/genres/:name' do
-        @user = User.find_by_id(session[:user_id])
+        @user = current_user
         if @user
             @genre = Genre.find_by(name: params[:name])
             @list = @user.movies.select {|movie| movie.genres.include?(@genre)}.sort_by {|movie| movie.name}
@@ -22,9 +22,9 @@ class GenreController < ApplicationController
     end
 
     helpers do
-        def get_genres(user)
+        def get_genres
             genres = []
-            user.genres.each do |genre|
+            current_user.genres.each do |genre|
                 if !genres.include?(genre)
                     genres << genre
                 end
