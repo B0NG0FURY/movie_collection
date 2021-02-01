@@ -13,7 +13,7 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: rgb(184, 187, 30);
+    background-color: rgb(223, 226, 30);
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
@@ -39,7 +39,7 @@
     position: absolute;
     left: 410px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-    color:rgb(184, 187, 30);
+    color: rgb(223, 226, 30);
   }
 
   .button {
