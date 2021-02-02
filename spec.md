@@ -21,10 +21,15 @@ Specs:
     Users can't create an account without filling out all of the forms. Movies cannot be created or edited unless at least the Movie's name is filled out
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
     Flash messages are implemented whenever a user fails to login successfully, fill out required forms, when a movie is added to collection, modified, or deleted
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+    README.md is complete and contains all above requirements
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+    There are a large number of commits
+- [x] Your commit messages are meaningful
+    Each commit has a message describing what was done
+- [x] You made the changes in a commit that relate to the commit message
+    Each commit has a message detailing changes done only within that commit
+- [x] You don't include changes in a commit that aren't related to the commit message
+    Commit messages only detail changes done within that commit
