@@ -37,7 +37,6 @@ class MovieController < ApplicationController
 
     get '/movies/:slug' do
         @user = current_user
-
         if @user
             @movie = find_by_slug(params[:slug])
             erb :"/movies/show"
