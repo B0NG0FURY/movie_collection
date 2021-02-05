@@ -29,6 +29,10 @@ class UserController < ApplicationController
     end
 
     get '/user/new' do
+        if logged_in?
+         flash[:error] = "You are already signed in to an account. If you want to create a new account you will need to log out first."
+         redirect '/user'
+        end
         erb :'/users/new'
     end
 
