@@ -23,13 +23,7 @@ class GenreController < ApplicationController
 
     helpers do
         def get_genres
-            genres = []
-            current_user.genres.each do |genre|
-                if !genres.include?(genre)
-                    genres << genre
-                end
-            end
-            genres
+            current_user.genres.uniq
         end
     end
 

@@ -23,13 +23,7 @@ class FormatController < ApplicationController
 
     helpers do
         def get_formats
-            formats = []
-            current_user.formats.each do |format|
-                if !formats.include?(format)
-                    formats << format
-                end
-            end
-            formats
+            current_user.formats.uniq
         end
     end
 

@@ -37,8 +37,8 @@ class MovieController < ApplicationController
 
     get '/movies/:slug' do
         @user = current_user
-        if @user
-            @movie = find_by_slug(params[:slug])
+        @movie = find_by_slug(params[:slug])
+        if @user && @movie
             erb :"/movies/show"
         else
             erb :"/users/error"
@@ -49,8 +49,8 @@ class MovieController < ApplicationController
         @user = current_user
         @genres = Genre.all
         @formats = Format.all
-        if @user
-            @movie = find_by_slug(params[:slug])
+        @movie = find_by_slug(params[:slug])
+        if @user && @movie
             erb :"/movies/edit"
         else
             erb :"/users/error"
